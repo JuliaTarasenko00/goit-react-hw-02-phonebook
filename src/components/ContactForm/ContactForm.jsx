@@ -14,7 +14,6 @@ export class ContactsForm extends Component {
     e.preventDefault();
     const phoneBook = {
       ...this.state,
-      number: Number(this.state.number),
     };
     this.props.onAddPhoneBook(phoneBook);
   };
@@ -30,7 +29,7 @@ export class ContactsForm extends Component {
               value={this.state.name}
               type="text"
               name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
             />
