@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {
+  ContactsForms,
+  ContactsLabel,
+  ContactsBtn,
+  ContactsInput,
+} from './ContactsForm.styled';
 
 export class ContactsForm extends Component {
   state = {
@@ -7,7 +14,6 @@ export class ContactsForm extends Component {
   };
 
   inputChange = e => {
-    // console.log(e.target.name);
     this.setState({ [e.target.name]: e.target.value });
   };
   formSubmit = e => {
@@ -21,10 +27,10 @@ export class ContactsForm extends Component {
   render() {
     return (
       <>
-        <form onSubmit={this.formSubmit}>
-          <label>
+        <ContactsForms onSubmit={this.formSubmit}>
+          <ContactsLabel>
             <span>Name</span>
-            <input
+            <ContactsInput
               onChange={this.inputChange}
               value={this.state.name}
               type="text"
@@ -33,22 +39,26 @@ export class ContactsForm extends Component {
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               required
             />
-          </label>
-          <label>
+          </ContactsLabel>
+          <ContactsLabel>
             <span>Phone</span>
-            <input
+            <ContactsInput
               onChange={this.inputChange}
               value={this.state.number}
               type="tel"
               name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
             />
-          </label>
-          <button>Add contact</button>
-        </form>
+          </ContactsLabel>
+          <ContactsBtn>Add contact</ContactsBtn>
+        </ContactsForms>
       </>
     );
   }
 }
+
+ContactsForm.propTypes = {
+  onSubmit: PropTypes.func,
+};

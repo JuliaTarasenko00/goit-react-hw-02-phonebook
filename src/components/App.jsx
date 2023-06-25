@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid/non-secure';
 import { ContactsForm } from './ContactForm/ContactForm';
+import Filter from './Filter/Filter';
+import { ContactList } from './ContactList/ContactList';
+export { ContactList } from './ContactList/ContactList';
 
 export class App extends Component {
   state = {
@@ -25,6 +28,11 @@ export class App extends Component {
     });
   };
 
+  onRemoveContact = contactId => {
+    this.setState({
+      contacts: this.state.contacts.filter(contact => contact.id !== contactId),
+    });
+  };
   filterPhone = e => {
     this.setState({ filter: e.target.value.toLowerCase() });
   };
@@ -38,21 +46,11 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <ContactsForm onAddPhoneBook={this.onAddPhoneBook} />
         <h2>Contacts</h2>
-
-        <input
-          type="text"
-          value={this.state.filter}
-          onChange={this.filterPhone}
-          placeholder="search"
+        <Filter value={this.state.filter} onChange={this.filterPhone} />
+        <ContactList
+          filteredContacts={filteredContacts}
+          onClick={this.onRemoveContact}
         />
-        <ul>
-          {filteredContacts.map(({ name, number, id }) => (
-            <li key={id}>
-              <p>{name}: </p>
-              <p>{number}</p>
-            </li>
-          ))}
-        </ul>
       </>
     );
   }
