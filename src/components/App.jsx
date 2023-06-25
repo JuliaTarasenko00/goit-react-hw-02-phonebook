@@ -33,6 +33,7 @@ export class App extends Component {
       contacts: this.state.contacts.filter(contact => contact.id !== contactId),
     });
   };
+
   filterPhone = e => {
     this.setState({ filter: e.target.value.toLowerCase() });
   };

@@ -22,6 +22,11 @@ export class ContactsForm extends Component {
       ...this.state,
     };
     this.props.onAddPhoneBook(phoneBook);
+    this.reset();
+  };
+
+  reset = () => {
+    this.setState({ name: '', number: '' });
   };
 
   render() {
