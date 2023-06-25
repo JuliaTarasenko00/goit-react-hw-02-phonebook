@@ -11,26 +11,32 @@ export class App extends Component {
     filter: '',
   };
 
-  onAddPhoneBook = event => {
+  onAddPhoneBook = contact => {
     const namePhone = this.state.contacts.find(
-      ({ name }) => event.name === name
+      ({ name }) => contact.name === name
     );
     if (namePhone) {
-      alert(`${event.name} is already in contacts.`);
+      alert(`${contact.name} is already in contacts.`);
       return;
     }
-    const contact = {
-      ...event,
+    const contactList = {
+      ...contact,
       id: nanoid(),
     };
-    this.setState({
-      contacts: [contact, ...this.state.contacts],
+    this.setState(prevState => {
+      return {
+        contacts: [contactList, ...prevState.contacts],
+      };
     });
   };
 
   onRemoveContact = contactId => {
-    this.setState({
-      contacts: this.state.contacts.filter(contact => contact.id !== contactId),
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(
+          contact => contact.id !== contactId
+        ),
+      };
     });
   };
 

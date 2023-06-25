@@ -18,10 +18,7 @@ export class ContactsForm extends Component {
   };
   formSubmit = e => {
     e.preventDefault();
-    const phoneBook = {
-      ...this.state,
-    };
-    this.props.onAddPhoneBook(phoneBook);
+    this.props.onAddPhoneBook(this.state);
     this.reset();
   };
 
